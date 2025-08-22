@@ -43,4 +43,4 @@ app.use("/api/chat", chatRoutes);
 
 startServer();
 
-  
+  export default app;
