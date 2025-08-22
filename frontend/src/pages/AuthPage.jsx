@@ -43,7 +43,6 @@ const AuthPage = () => {
           </SignInButton>
         </div>
       </div>
-
       <div className="auth-right">
         <div className="auth-image-container">
           <img src="/vite.svg" alt="Team collaboration" className="auth-image" />

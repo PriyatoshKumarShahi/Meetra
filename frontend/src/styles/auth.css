@@ -208,7 +208,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: linear-gradient(45deg, rgba(74, 21, 75, 0.15), rgba(45, 27, 105, 0.15)); */
+  background: linear-gradient(45deg, rgba(74, 21, 75, 0.15), rgba(45, 27, 105, 0.15));
 }
 
 /* Responsive Design */
