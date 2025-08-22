@@ -7,15 +7,12 @@ import * as Sentry from "@sentry/react";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
-// this hook is used to connect the current user to the Stream Chat API
-// so that users can see each other's messages, send messages to each other, get realtime updates, etc.
-// it also handles  the disconnection when the user leaves the page
+
 
 export const useStreamChat = () => {
   const { user } = useUser();
   const [chatClient, setChatClient] = useState(null);
 
-  // fetch stream token using react-query
   const {
     data: tokenData,
     isLoading,
@@ -23,11 +20,10 @@ export const useStreamChat = () => {
   } = useQuery({
     queryKey: ["streamToken"],
     queryFn: getStreamToken,
-    enabled: !!user?.id, // this will take the object and convert it to a boolean
+    enabled: !!user?.id, 
   });
 
-  // init stream chat client
-  // init stream chat client
+
   useEffect(() => {
     if (!tokenData?.token || !user?.id || !STREAM_API_KEY) return;
 
@@ -63,7 +59,6 @@ export const useStreamChat = () => {
 
     connect();
 
-    // cleanup
     return () => {
       cancelled = true;
       client.disconnectUser();

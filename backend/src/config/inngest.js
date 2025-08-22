@@ -4,7 +4,7 @@ import { User } from "../models/user.model.js"; // Import the User model
 import { addUserToPublicChannels, deleteStreamUser, upsertStreamUser } from "./stream.js";
 
 // Create a client to send and receive events
-export const inngest = new Inngest({ id: "slack-clone" });
+export const inngest = new Inngest({ id: "meetra" });
 
 const syncUser = inngest.createFunction(
   { id: "sync-user" },
@@ -45,5 +45,4 @@ const deleteUserFromDB = inngest.createFunction(
   }
 );
 
-// Create an empty array where we'll export future Inngest functions
 export const functions = [syncUser, deleteUserFromDB];
