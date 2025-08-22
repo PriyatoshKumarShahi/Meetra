@@ -11,7 +11,7 @@ const AuthPage = () => {
             <span className="brand-name">Meetra</span>
           </div>
 
-          <h1 className="hero-title">Where Work Happens ✨</h1>
+          <h1 className="hero-title">Where Work <span className="important">Happens</span> </h1>
 
           <p className="hero-subtitle">
             Connect with your team instantly through secure, real-time messaging. Experience
@@ -45,7 +45,7 @@ const AuthPage = () => {
       </div>
       <div className="auth-right">
         <div className="auth-image-container">
-          <img src="/vite.svg" alt="Team collaboration" className="auth-image" />
+      <img src="/vite.svg" alt="Team collaboration" className="auth-image" />
           <div className="image-overlay"></div>
         </div>
       </div>

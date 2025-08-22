@@ -15,9 +15,7 @@ app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware()); // req.auth will be available in the request object
 
-app.get("/debug-sentry", (req, res) => {
-  throw new Error("My first Sentry error!");
-});
+
 
 app.get("/", (req, res) => {
   res.send("Hello World! 123");

@@ -16,16 +16,22 @@
 }
 
 .auth-left {
-  flex: 1;
+  flex: 0.9;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem;
+  padding: 2.5rem;
   position: relative;
+}
+.hero-title span {
+  background: linear-gradient(135deg, hsl(280, 70%, 45%), hsl(300, 80%, 60%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* for Firefox */
 }
 
 .auth-right {
-  flex: 0.8;
+  flex: 1;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -35,7 +41,7 @@
 }
 
 .auth-hero {
-  max-width: 500px;
+  max-width: 1500px;
   color: white;
   z-index: 2;
   padding: 3rem;
@@ -52,6 +58,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-top: -40px;
 }
 
 .brand-logo {
@@ -74,14 +81,14 @@
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #fff, #e0e0e0);
+  /* background: linear-gradient(45deg, #fff, #e0e0e0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text; */
   margin-top: 2rem;
 }
 
