@@ -4,7 +4,6 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
 const AuthContext = createContext({});
-
 export default function AuthProvider({ children }) {
   const { getToken } = useAuth();
 
@@ -30,7 +29,6 @@ export default function AuthProvider({ children }) {
       }
     );
 
-    // cleanup function to remove the interceptor, this is important to avoid memory leaks
     return () => axiosInstance.interceptors.request.eject(interceptor);
   }, [getToken]);
 
