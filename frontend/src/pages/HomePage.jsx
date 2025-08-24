@@ -20,6 +20,7 @@ import CreateChannelModal from "../components/CreateChannelModal";
 import CustomChannelPreview from "../components/CustomChannelPreview";
 import UsersList from "../components/UsersList";
 import CustomChannelHeader from "../components/CustomChannelHeader";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -27,6 +28,23 @@ const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { chatClient, error, isLoading } = useStreamChat();
+
+  const handleDeleteChannel = async (channel) => {
+  try {
+    // Clear UI before deletion
+    if (activeChannel && activeChannel.id === channel.id) {
+      setActiveChannel(null);
+      setSearchParams({});
+    }
+
+    await channel.delete(); // Delete after UI reset
+    toast.success("Channel deleted successfully");
+  } catch (error) {
+    console.error("Error deleting channel:", error);
+    toast.error("Failed to delete channel");
+  }
+};
+
 
   // set active channel from URL params
   useEffect(() => {
@@ -54,7 +72,7 @@ const HomePage = () => {
               <div className="team-channel-list__header gap-4">
                 <div className="brand-container">
                   <img src="/logo.png" alt="Logo" className="brand-logo" />
-                  <span className="brand-name">Meetra</span>
+                  <span className="brand-name"></span>
                 </div>
                 <div className="user-button-wrapper">
                   <UserButton />
@@ -63,7 +81,10 @@ const HomePage = () => {
               {/* CHANNELS LIST */}
               <div className="team-channel-list__content">
                 <div className="create-channel-section">
-                  <button onClick={() => setIsCreateModalOpen(true)} className="create-channel-btn">
+                  <button
+                    onClick={() => setIsCreateModalOpen(true)}
+                    className="create-channel-btn"
+                  >
                     <PlusIcon className="size-4" />
                     <span>Create Channel</span>
                   </button>
@@ -77,7 +98,10 @@ const HomePage = () => {
                     <CustomChannelPreview
                       channel={channel}
                       activeChannel={activeChannel}
-                      setActiveChannel={(channel) => setSearchParams({ channel: channel.id })}
+                      setActiveChannel={(channel) =>
+                        setSearchParams({ channel: channel.id })
+                      }
+                      onDeleteChannel={handleDeleteChannel}
                     />
                   )}
                   List={({ children, loading, error }) => (
@@ -90,8 +114,16 @@ const HomePage = () => {
                       </div>
 
                       {/* todos: add better components here instead of just a simple text  */}
-                      {loading && <div className="loading-message">Loading channels...</div>}
-                      {error && <div className="error-message">Error loading channels</div>}
+                      {loading && (
+                        <div className="loading-message">
+                          Loading channels...
+                        </div>
+                      )}
+                      {error && (
+                        <div className="error-message">
+                          Error loading channels
+                        </div>
+                      )}
 
                       <div className="channels-list">{children}</div>
 
@@ -111,19 +143,26 @@ const HomePage = () => {
 
           {/* RIGHT CONTAINER */}
           <div className="chat-main">
-            <Channel channel={activeChannel}>
-              <Window>
-                <CustomChannelHeader />
-                <MessageList />
-                <MessageInput />
-              </Window>
-
-              <Thread />
-            </Channel>
+            {activeChannel ? (
+              <Channel channel={activeChannel}>
+                <Window>
+                  <CustomChannelHeader />
+                  <MessageList />
+                  <MessageInput />
+                </Window>
+                <Thread />
+              </Channel>
+            ) : (
+              <div className="flex items-center justify-center h-full text-2xl text-gray-500 ">
+                Select or create a channel
+              </div>
+            )}
           </div>
         </div>
 
-        {isCreateModalOpen && <CreateChannelModal onClose={() => setIsCreateModalOpen(false)} />}
+        {isCreateModalOpen && (
+          <CreateChannelModal onClose={() => setIsCreateModalOpen(false)} />
+        )}
       </Chat>
     </div>
   );

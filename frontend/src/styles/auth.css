@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 .auth-container {
   min-height: 100vh;
   display: flex;
@@ -53,17 +58,37 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
 }
-
+.chat-wrapper{
+  width: 100%;
+}
 .brand-container {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: -40px;
+  background-color: transparent;
+  margin-top: -30px;
+}
+.brand-container img{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* margin-top: -40px; */
+  height: 4rem;
+  width: 10rem;
+  border-radius:500px;
+
+
+}
+.brand-container img {
+  filter: brightness(1.3) contrast(1.1);
 }
 
+
+
+
 .brand-logo {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 5.5rem;
+  height: 5.5rem;
   border-radius: 0.75rem;
   /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); */
 }
@@ -220,14 +245,21 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
   .auth-container {
     flex-direction: column;
   }
-
+*{
+  margin: px;
+  
+  padding: 0;
+}
   .auth-left {
     padding: 2rem 1.5rem;
   }
-
+.brand-container{
+  margin: 0;
+}
   .auth-hero {
     padding: 2rem;
   }
@@ -244,7 +276,7 @@
   }
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
 
   .brand-name {

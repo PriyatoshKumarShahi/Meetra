@@ -7,8 +7,8 @@ const AuthPage = () => {
       <div className="auth-left">
         <div className="auth-hero">
           <div className="brand-container">
-            <img src="/vite.svg" alt="meetra" className="brand-logo" />
-            <span className="brand-name">Meetra</span>
+            <img src="/logo.png" alt="meetra" className="brand-logo" />
+            <span className="brand-name"></span>
           </div>
 
           <h1 className="hero-title">Where Work <span className="important">Happens</span> </h1>
@@ -45,7 +45,7 @@ const AuthPage = () => {
       </div>
       <div className="auth-right">
         <div className="auth-image-container">
-      <img src="/vite.svg" alt="Team collaboration" className="auth-image" />
+      <img src="/hero.webp" alt="Team collaboration" className="auth-image" />
           <div className="image-overlay"></div>
         </div>
       </div>

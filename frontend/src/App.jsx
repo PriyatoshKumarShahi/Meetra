@@ -8,9 +8,9 @@ import HomePage from "./pages/HomePage";
 const App = () => {
   const { isSignedIn, isLoaded } = useAuth();
 
-  if (!isLoaded) {
-    return <div>Loading...</div>; 
-  }
+  // if (!isLoaded) {
+  //   return <div>Loading...</div>; 
+  // }
 
   return (
     <Routes>
