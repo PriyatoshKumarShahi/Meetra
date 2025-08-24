@@ -2,8 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { useSearchParams } from "react-router";
 import { useChatContext } from "stream-chat-react";
-
-import * as Sentry from "@sentry/react";
 import { CircleIcon } from "lucide-react";
 
 const UsersList = ({ activeChannel }) => {
@@ -19,7 +17,9 @@ const UsersList = ({ activeChannel }) => {
       { limit: 20 }
     );
 
-    const usersOnly = response.users.filter((user) => !user.id.startsWith("recording-"));
+    const usersOnly = response.users.filter(
+      (user) => !user.id.startsWith("recording-")
+    );
 
     return usersOnly;
   }, [client]);
@@ -35,36 +35,33 @@ const UsersList = ({ activeChannel }) => {
     staleTime: 1000 * 60 * 5, // 5 mins
   });
 
-  // staleTime
-  // what it does: tells React Query the data is "fresh" for 5 minutes
-  // behavior: during these 5 minutes, React Query WON'T refetch the data automatically
-
   const startDirectMessage = async (targetUser) => {
     if (!targetUser || !client?.user) return;
 
     try {
-      //  bc stream does not allow channelId to be longer than 64 chars
-      const channelId = [client.user.id, targetUser.id].sort().join("-").slice(0, 64);
+      // bc stream does not allow channelId to be longer than 64 chars
+      const channelId = [client.user.id, targetUser.id]
+        .sort()
+        .join("-")
+        .slice(0, 64);
+
       const channel = client.channel("messaging", channelId, {
         members: [client.user.id, targetUser.id],
       });
+
       await channel.watch();
       setSearchParams({ channel: channel.id });
     } catch (error) {
-      console.log("Error creating DM", error),
-        Sentry.captureException(error, {
-          tags: { component: "UsersList" },
-          extra: {
-            context: "create_direct_message",
-            targetUserId: targetUser?.id,
-          },
-        });
+      console.log("Error creating DM", error);
     }
   };
 
-  if (isLoading) return <div className="team-channel-list__message">Loading users...</div>;
-  if (isError) return <div className="team-channel-list__message">Failed to load users</div>;
-  if (!users.length) return <div className="team-channel-list__message">No other users found</div>;
+  if (isLoading)
+    return <div className="team-channel-list__message">Loading users...</div>;
+  if (isError)
+    return <div className="team-channel-list__message">Failed to load users</div>;
+  if (!users.length)
+    return <div className="team-channel-list__message">No other users found</div>;
 
   return (
     <div className="team-channel-list__users">
@@ -81,7 +78,8 @@ const UsersList = ({ activeChannel }) => {
             key={user.id}
             onClick={() => startDirectMessage(user)}
             className={`str-chat__channel-preview-messenger  ${
-              isActive && "!bg-black/20 !hover:bg-black/20 border-l-8 border-purple-500 shadow-lg0"
+              isActive &&
+              "!bg-black/20 !hover:bg-black/20 border-l-8 border-purple-500 shadow-lg0"
             }`}
           >
             <div className="flex items-center gap-2 w-full">
@@ -102,7 +100,9 @@ const UsersList = ({ activeChannel }) => {
 
                 <CircleIcon
                   className={`w-2 h-2 absolute -bottom-0.5 -right-0.5 ${
-                    user.online ? "text-green-500 fill-green-500" : "text-gray-400 fill-gray-400"
+                    user.online
+                      ? "text-green-500 fill-green-500"
+                      : "text-gray-400 fill-gray-400"
                   }`}
                 />
               </div>

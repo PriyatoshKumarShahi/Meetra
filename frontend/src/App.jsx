@@ -4,13 +4,23 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import AuthPage from "./pages/AuthPage";
 import CallPage from "./pages/CallPage";
 import HomePage from "./pages/HomePage";
+import { LoaderIcon } from "lucide-react";
 
 const App = () => {
   const { isSignedIn, isLoaded } = useAuth();
 
-  // if (!isLoaded) {
-  //   return <div>Loading...</div>; 
-  // }
+if (!isLoaded) {
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-black">
+      <div className="flex flex-col items-center gap-4">
+        <LoaderIcon className="w-12 h-12 animate-spin text-white" />
+        <p className="text-white text-lg font-semibold animate-pulse">
+          Preparing your space...
+        </p>
+      </div>
+    </div>
+  );
+}
 
   return (
     <Routes>
