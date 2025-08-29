@@ -564,7 +564,7 @@
 }
 
 .create-channel-btn {
-  width: 100%;
+  width: 99%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1012,7 +1012,6 @@
   .chat-wrapper {
     padding: 0.5rem;
   }
-
   .chat-container {
     height: calc(100vh - 1rem);
     flex-direction: column;
