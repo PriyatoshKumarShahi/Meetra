@@ -557,8 +557,10 @@
 }
 
 .create-channel-section {
-  padding: 1.25rem 1.5rem;
-  position: relative;
+  max-height: 70vh;       /* so it fits nicely below header */
+  overflow-y: auto;       /* enables vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  padding-bottom: 1rem;   /* spacing for last item */
 }
 
 .create-channel-btn {
@@ -597,6 +599,13 @@
 
 .create-channel-btn:hover::before {
   left: 100%;
+}
+
+@media (min-width: 768px) {
+  .create-channel-users {
+    max-height: none;
+    overflow-y: visible;
+  }
 }
 
 .create-channel-btn:hover {
@@ -1010,14 +1019,20 @@
     border-radius: 0.75rem;
   }
 
+  /* FIX: channel list full height + scroll */
   .str-chat__channel-list {
     width: 100%;
-    height: 200px;
+    flex: 0 0 auto;            /* don’t shrink */
+    max-height: 40vh;          /* take up to 40% of screen height */
+    overflow-y: auto;          /* scroll inside */
     border-right: none;
     border-bottom: 1px solid rgba(116, 58, 213, 0.3);
+    -webkit-overflow-scrolling: touch;
   }
 
   .chat-main {
+    flex: 1;                   /* fill rest of screen */
+    overflow: hidden;
     border-radius: 0 0 0.75rem 0.75rem;
   }
 }
